@@ -1,0 +1,22 @@
+version: 1
+frontend:
+  phases:
+    # 1. Fase de Instalación (Pre-Build)
+    preBuild:
+      # Instalar Node.js y luego pnpm
+      commands:
+        - npm install -g pnpm
+        - pnpm install
+    # 2. Fase de Construcción (Build)
+    build:
+      commands:
+        - pnpm run build
+  # Directorio donde Next.js genera los archivos finales
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  # Configuración para Next.js (SSR)
+  cache:
+    paths:
+      - node_modules/**/*
